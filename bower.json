@@ -1,0 +1,19 @@
+{
+  "name": "homework4",
+  "version": "0.0.0",
+  "authors": [
+    "Dan Ratnikov <ratnikov.danil@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.2",
+    "angular": "~1.3.11"
+  }
+}
