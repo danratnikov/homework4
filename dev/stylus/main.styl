@@ -1,5 +1,100 @@
-body
-	background-color #08f
+@font-face
+	font-family SegoeUILight
+	src url("../font/SegoeUILight/SegoeUILight.eot")
+	src url("../font/SegoeUILight/SegoeUILight.eot?#iefix")format("embedded-opentype"), url("../font/SegoeUILight/SegoeUILight.woff") format("woff"), url("../font/SegoeUILight/SegoeUILight.ttf") format("truetype");
+	font-style normal
+	font-weight normal
 
-h1
-	color #fff
+@font-face
+	font-family SegoeUIRegular
+	src url("../font/SegoeUIRegular/SegoeUIRegular.eot")
+	src url("../font/SegoeUIRegular/SegoeUIRegular.eot?#iefix")format("embedded-opentype"), url("../font/SegoeUIRegular/SegoeUIRegular.woff") format("woff"), url("../font/SegoeUIRegular/SegoeUIRegular.ttf") format("truetype");
+	font-style normal
+	font-weight normal
+
+rounded(r)
+	border-radius r
+
+cf()
+	&:before
+	&:after
+		content ""
+		display table
+	&:after
+		clear both
+	zoom 1 if support-for-ie
+	
+body
+	background #ccc
+	
+.page
+	position absolute
+	top 50%
+	left 50%
+	width 800px
+	height 500px
+	transform translate(-50%, -60%)
+	
+*::selection
+	background-color: transparent
+	
+.page__title
+	font-family SegoeUIRegular
+	color #000
+	text-transform uppercase
+	text-align center
+	margin-bottom 50px
+	
+.page-head
+	margin-bottom 18px
+	
+.page-main
+	rounded(5px)
+	cf()
+	background-color #eeeced
+	padding 25px 13px
+	
+.page-table
+	font 12px/34px SegoeUIRegular
+	cursor pointer
+	margin 0
+	th 
+		font-size 14px
+
+.page__btn
+	display inline-block
+	width 34px
+	height 34px
+	font-size 0
+	margin-left 10px
+	&:first-child
+		margin-left 0
+	background url(../img/icons/ic-sprite.png) transparent
+	&__tile
+		background-position right top
+		&:hover
+			background-position right bottom
+	&__list
+		background-position left top	
+		&:hover
+			background-position left bottom	
+.btn-add
+	box-sizing border-box
+	padding 10px 25px
+	font 14px SegoeUIRegular
+
+.contact-tile
+	float left
+	width 20%
+	margin-bottom 0
+	margin-top 5px
+	&__name
+		font 12px SegoeUIRegular
+	&__number
+		font 12px SegoeUIRegular
+
+.contact__img
+	width 130px
+	height 130px
+	max-width 130px
+	max-height 130px

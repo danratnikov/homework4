@@ -6,7 +6,7 @@ var
 	connect = require('gulp-connect'),
 	rename = require('gulp-rename'),
 	notify = require('gulp-notify'),
-	opn = require('opn');
+	imageMin = require('gulp-imagemin');
 
 gulp.task('connect', function(){
 	connect.server({
@@ -37,7 +37,6 @@ gulp.task('jade-template', function(){
 });
 
 gulp.task('stylus', function(){
-	console.log('stylus');
 	gulp.src('dev/stylus/*.styl')
 		.pipe(stylus())
 		.on('error', console.log)
@@ -46,7 +45,26 @@ gulp.task('stylus', function(){
 		.pipe(connect.reload());
 });
 
-gulp.task('build', ['jade-page', 'jade-template', 'stylus'], function(){
+gulp.task('font', function(){
+	gulp.src('dev/font/**/*')
+		.pipe(gulp.dest('app/font'))
+		.pipe(notify("Fonts copied!"));
+});
+
+gulp.task('image', function(){
+	gulp.src('dev/img/**/*')
+		.pipe(imageMin())
+		.pipe(gulp.dest('app/img'))
+		.pipe(notify("Images copied!"));
+});
+
+gulp.task('js', function(){
+	gulp.src('dev/js/**/*.js')
+		.pipe(gulp.dest('app/js/app'))
+		.pipe(notify("JavaScript moved!"));
+});
+
+gulp.task('build', ['jade-page', 'jade-template', 'stylus', 'image' ,'font', 'js'], function(){
 	gulp.src('dev/vendor/bootstrap/dist/css/bootstrap.min.css')
 		.pipe(gulp.dest('app/css/vendor/bootstrap'));
 	gulp.src('dev/vendor/jquery/dist/jquery.min.js')
@@ -59,6 +77,9 @@ gulp.task('watch', function(){
 	gulp.watch('dev/jade/*.jade', ['jade-page']);
 	gulp.watch('dev/jade/templates/*.jade', ['jade-template']);
 	gulp.watch('dev/stylus/*.styl', ['stylus']);
+	gulp.watch('dev/font/**/*', ['font']);
+	gulp.watch('dev/img/**/*', ['image']);
+	gulp.watch('dev/js/**/*', ['js']);
 });
 
 gulp.task('default', ['build', 'connect', 'watch']);
