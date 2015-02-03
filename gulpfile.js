@@ -69,7 +69,9 @@ gulp.task('build', ['jade-page', 'jade-template', 'stylus', 'image' ,'font', 'js
 		.pipe(gulp.dest('app/css/vendor/bootstrap'));
 	gulp.src('dev/vendor/jquery/dist/jquery.min.js')
 		.pipe(gulp.dest('app/js/vendor/jquery'));
-	gulp.src('dev/vendor/angular/angular.min.js')
+	gulp.src('dev/vendor/angular/angular.min.js+(.*)')
+		.pipe(gulp.dest('app/js/vendor/angular'));
+	gulp.src('dev/vendor/angular-route/angular-route.min.js+(.*)')
 		.pipe(gulp.dest('app/js/vendor/angular'));
 });
 

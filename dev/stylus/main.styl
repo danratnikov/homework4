@@ -32,27 +32,40 @@ body
 	top 50%
 	left 50%
 	width 800px
-	height 500px
+	height 441px
 	transform translate(-50%, -60%)
 	
 *::selection
 	background-color: transparent
+
+.page-app 
+	width 800px
+	height 456px
 	
 .page__title
-	font-family SegoeUIRegular
+	font 24px SegoeUIRegular
 	color #000
 	text-transform uppercase
 	text-align center
-	margin-bottom 50px
+	margin-bottom 0px
 	
 .page-head
-	margin-bottom 18px
-	
+	margin-top 10px
+	height 40px
+
+.page-head__info
+	margin-top 25px	
+
+.page-head__col
+	&__right
+		cf()
+
 .page-main
 	rounded(5px)
 	cf()
 	background-color #eeeced
-	padding 25px 13px
+	padding 0
+
 	
 .page-table
 	font 12px/34px SegoeUIRegular
@@ -62,13 +75,15 @@ body
 		font-size 14px
 
 .page__btn
-	display inline-block
+	display block
+	float right
 	width 34px
-	height 34px
+	height 40px
 	font-size 0
-	margin-left 10px
+	margin-right 10px
+	padding 0
 	&:first-child
-		margin-left 0
+		margin-right -5px
 	background url(../img/icons/ic-sprite.png) transparent
 	&__tile
 		background-position right top
@@ -80,21 +95,115 @@ body
 			background-position left bottom	
 .btn-add
 	box-sizing border-box
-	padding 10px 25px
 	font 14px SegoeUIRegular
+.page-contact-tile
+	padding 5px 0 15px
+	background-color #f5f1f2
 
+.page-contact-list
+	padding 33px 20px
+
+.page-contact-list
+.page-contact-tile
+	margin-top 15px
+		
 .contact-tile
 	float left
 	width 20%
 	margin-bottom 0
-	margin-top 5px
+	margin-top 10px
+	cursor pointer
 	&__name
 		font 12px SegoeUIRegular
+		margin-top 8px
+		margin-bottom 0px
 	&__number
 		font 12px SegoeUIRegular
+		margin-top 0px
+		margin-bottom 0px
+	&__list
+		padding 0
+		margin 0
+		list-style none
+	&__img
+		margin-top 0px
+		background-color #eeeeee
+		width 130px
+		height 130px
+		max-width 130px
+		max-height 130px
+		border 1px solid #cccccc
+		rounded(5px)
 
-.contact__img
-	width 130px
-	height 130px
-	max-width 130px
-	max-height 130px
+.contact-form
+	padding 40px 0 40px
+	background-color #f3efef
+
+.contact-form__group
+	margin 15px 0 0 0
+	&:first-child
+		margin-top 0
+			
+.contact-form__input
+	width 100%
+	margin-top 17px
+	line-height 27px
+	&:first-child
+		margin-top 8px
+		
+.thumb-container
+	width 200px
+	margin 0 auto
+
+.form-contact__btn
+	font 13px SegoeUIRegular
+	display block
+	background-color #ffffff
+	width 90px
+	&__left
+		float left
+	&__right
+		float right
+
+.contact-form__img
+	min-height 200px
+	min-width 200px
+	rounded(7px)
+	border 1px solid #cccccc
+	background-color #eeeeee
+
+.thumb-desc 
+	margin-top 10px
+	
+.contact-form__label
+	font 14px SegoeUIRegular
+	color #010101
+	width 100%
+
+.contact-form__col
+	padding-left 27px
+	padding-right 98px
+	padding-top 0px
+	&__thumbnail
+		width 200px
+		margin 0 auto
+		
+.page-head__btn__back
+	display block
+	width 26px
+	height 26px
+	background url(../img/icons/btn-back.png) left top
+	border 0
+	outline 0
+	margin-left 14px
+	&:hover
+		background-position right top
+		
+.contact-form__input-icon
+	width 38px
+	background-color #eeeeee
+	background url(../img/icons/input-icons.png) no-repeat
+	&__email
+		background-position left 3px
+	&__phone
+		background-position right 3px
