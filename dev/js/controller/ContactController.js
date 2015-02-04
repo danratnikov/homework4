@@ -10,23 +10,24 @@ app.controller('ContactController', ['$scope', '$firebase', function($scope, $fi
 	$scope.obj = {};
 	$scope.save = false;
 	$scope.mode = '';
+	$scope.changed = false;
 
-	$scope.setPage = function(p, index) {
+
+	$scope.setPage = function(p, contact) {
 		if (p === 'create') {
 			$scope.mode = 'create';
 			$scope.obj = {};
 			$scope.page = 'info';
 		} else {
 			$scope.mode = 'update';
-			$scope.obj = $scope.contacts[index];
+			$scope.obj = contact;
 			$scope.page = p;
+			$scope.changed = false
 		}
 	};
 
-
 	$scope.createContact = function() {
 		$scope.contacts.$add($scope.obj);
-		console.log('add');
 	};
 
 	$scope.updateContact = function(contact) {
