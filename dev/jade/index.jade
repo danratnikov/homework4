@@ -2,62 +2,63 @@ doctype
 html(lang='ru' ng-app="app")
 	include _head.jade
 	body
-		.page(ng-controller="ContactController")
-			.page-app(ng-show="page === 'contacts'")
-				h2.page__title Контакты
-				.row.page-head
-					.col-md-6.col-sm-6.col-xs-6.page-head__col.page-head__col__left
-						button.btn.btn-default.btn-add(ng-click="setPage('info', 0)") Добавить
-					.col-md-6.col-sm-6.col-xs-6.text-right.page-head__col.page-head__col__right
-						a(href="#" ng-click="tile=true").page__btn.page__btn__tile Плитка
-						a(href="#" ng-click="tile=false").page__btn.page__btn__list Список
-				.page-contact-list.page-main(ng-hide="tile")
-					table.table.table-hover.page-table
-						tr
-							each field in ['#', 'Имя', 'Фамилия', 'Телефон', 'Email'] 
-								th= field
-							tr(ng-repeat="contact in contacts" ng-if="contact.index !== 0" ng-click="setPage('info', contact)")
-								td {{contact.index}}
-								td {{contact.firstname}}
-								td {{contact.secondname}}
-								td {{contact.phone}}
-								td {{contact.email}}
-				.page-contact-tile.page-main(ng-show="tile")
-					ul.contact-tile__list
-						li.contact-tile.text-center(ng-repeat="contact in contacts" ng-if="contact.index !== 0" ng-click="setPage('info', contact)")
-							img.contact-tile__img(src="{{contact.image}}")
-							h3.contact-tile__name {{contact.firstname + ' ' + contact.secondname}}
-							p.contact-tile__number {{contact.phone}}
-			.page-app(ng-show="page === 'info'")
-				h2.page__title Контакт
-				.row.page-head.page-head__info
-					button.page-head__btn__back(ng-click="setPage('contacts')")
-				.page-main.contact-form
-					.row
-						.col-md-6.col-sm-6.col-xs-6
-							.contact-form__col.contact-form__col__thumbnail
-								.thumb-container
-									img(src="{{contacts[id].image}}").contact-form__img
-									.thumb-desc
-										button.btn.btn-default.form-contact__btn.form-contact__btn__left(type="submit" ng-click="addContact(id)") Сохранить
-										button.btn.btn-default.form-contact__btn.form-contact__btn__right(type="submit") Удалить
-						.col-md-6.col-sm-6.col-xs-6
-							.contact-form__col
-								form
-									.form-group.contact-form__group
-										label(for="firstname").contact-form__label Имя
-										input.form-control#firstname(placeholder="Имя контакта" value="{{contacts[id].firstname}}")
-									.form-group.contact-form__group
-										label(for="secondname").contact-form__label Фамилия
-										input.form-control#secondname(placeholder="Фамилия контакта" value="{{contacts[id].secondname}}")
-									.form-group.contact-form__group
-										label.contact-form__label Контактная информация
-											.input-group.contact-form__input
-												.input-group-addon.contact-form__input-icon.contact-form__input-icon__email
-												input.form-control#email(type="text" placeholder="Email" value="{{contacts[id].email}}")
+		.wrapper
+			.page(ng-controller="ContactController")
+				.page-app(ng-show="page === 'contacts'")
+					h2.page__title Контакты
+					.row.page-head
+						.col-md-6.col-sm-6.col-xs-6.page-head__col.page-head__col__left
+							button.btn.btn-default.btn-add(ng-click="setPage('create')") Добавить
+						.col-md-6.col-sm-6.col-xs-6.text-right.page-head__col.page-head__col__right
+							a(href="#" ng-click="tile=true").page__btn.page__btn__tile Плитка
+							a(href="#" ng-click="tile=false").page__btn.page__btn__list Список
+					.page-contact-list.page-main(ng-hide="tile")
+						table.table.table-hover.page-table
+							tr
+								each field in ['#', 'Имя', 'Фамилия', 'Телефон', 'Email'] 
+									th= field
+								tr(ng-repeat="contact in contacts track by $index" ng-click="setPage('info', $index)")
+									td {{$index + 1}}
+									td {{contact.firstname}}
+									td {{contact.secondname}}
+									td {{contact.phone}}
+									td {{contact.email}}
+					.page-contact-tile.page-main(ng-show="tile")
+						ul.contact-tile__list
+							li.contact-tile.text-center(ng-repeat="contact in contacts track by $index" ng-click="setPage('info', $index)")
+								img.contact-tile__img(src="{{contact.image}}")
+								h3.contact-tile__name {{contact.firstname + ' ' + contact.secondname}}
+								p.contact-tile__number {{contact.phone}}
+				.page-app(ng-show="page === 'info'")
+					h2.page__title(ng-click="alert('info')") Контакт
+					.row.page-head.page-head__info
+						button.page-head__btn__back(ng-click="setPage('contacts')")
+					.page-main.contact-form
+						.row
+							.col-md-6.col-sm-6.col-xs-6
+								.contact-form__col.contact-form__col__thumbnail
+									.thumb-container
+										img(src="{{obj.image}}" ng-model="obj.image").contact-form__img
+										.thumb-desc
+											button.btn.btn-default.form-contact__btn.form-contact__btn__left(ng-click="updateContact(obj)") Сохранить
+											button.btn.btn-default.form-contact__btn.form-contact__btn__right(ng-click="deleteContact(obj)") Удалить
+							.col-md-6.col-sm-6.col-xs-6
+								.contact-form__col
+									form
+										.form-group.contact-form__group
+											label(for="firstname").contact-form__label Имя
+											input.form-control#firstname(placeholder="Имя контакта" ng-model="obj.firstname")
+										.form-group.contact-form__group
+											label(for="secondname").contact-form__label Фамилия
+											input.form-control#secondname(placeholder="Фамилия контакта" ng-model="obj.secondname")
+										.form-group.contact-form__group
+											label.contact-form__label Контактная информация
+												.input-group.contact-form__input
+													.input-group-addon.contact-form__input-icon.contact-form__input-icon__email
+													input.form-control#email(type="text" placeholder="Email" ng-model="obj.email")
 											.input-group.contact-form__input
 												.input-group-addon.contact-form__input-icon.contact-form__input-icon__phone
-												input.form-control#phone(type="text" placeholder="Телефон" value="{{contacts[id].phone}}")
+												input.form-control#phone(type="text" placeholder="Телефон" ng-model="obj.phone")
 
 
 
