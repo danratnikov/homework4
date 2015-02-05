@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'firebase']);
+var app = angular.module('app', ['ngRoute', 'firebase', 'blueimp.fileupload']);
 
 app.controller('ContactController', ['$scope', '$firebase', function($scope, $firebase) {
 	var ref = new Firebase("https://glowing-fire-3534.firebaseio.com/");
@@ -22,12 +22,18 @@ app.controller('ContactController', ['$scope', '$firebase', function($scope, $fi
 			$scope.mode = 'update';
 			$scope.obj = contact;
 			$scope.page = p;
-			$scope.changed = false
+			$scope.changed = false;
 		}
 	};
 
 	$scope.createContact = function() {
-		$scope.contacts.$add($scope.obj);
+		$scope.contacts.$add({
+			firstname: $scope.obj.firstname,
+			secondname: $scope.obj.secondname,
+			image: $scope.obj.image || 'http://lorempixel.com/200/200/abstract',
+			phone: $scope.obj.phone || 'xxxxxxxxxxxx',
+			email: $scope.obj.email || '????????????',
+		});
 	};
 
 	$scope.updateContact = function(contact) {
