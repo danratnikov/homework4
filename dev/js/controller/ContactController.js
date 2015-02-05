@@ -45,20 +45,3 @@ app.controller('ContactController', ['$scope', '$firebase', function($scope, $fi
 
 }]);
 
-$(document).ready(function(){
-	upload.init();
-});
-
-var upload = (function () {
-	function init() {
-
-	}
-
-	function upload (e){
-
-	}
-	return {
-		init: init,
-		upload: upload
-	}
-})();

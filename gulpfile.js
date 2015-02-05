@@ -73,6 +73,8 @@ gulp.task('build', ['jade-page', 'jade-template', 'stylus', 'image' ,'font', 'js
 		.pipe(gulp.dest('app/js/vendor/angular'));
 	gulp.src('dev/vendor/angular-route/angular-route.min.js+(.*)')
 		.pipe(gulp.dest('app/js/vendor/angular'));
+	gulp.src('dev/vendor/jquery-file-upload/js/jquery.fileupload-angular.js')
+		.pipe(gulp.dest('app/js/vendor/jquery-file-upload'));
 });
 
 gulp.task('watch', function(){
