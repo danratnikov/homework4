@@ -49,7 +49,7 @@ html(lang='ru' ng-app="app")
 											.thumb
 												img#contact-img(src="{{obj.image}}" ng-model="obj.image").contact-form__img
 												.contact-form__img-hover Поменять
-												input#contact-img-input(type='file')
+												input#contact-img-input(type="file")
 											.thumb-desc
 												button.btn.btn-default.form-contact__btn.form-contact__btn__left(ng-click="updateContact(obj)" ng-if="changed && contactForm.$valid") Сохранить
 												button.btn.btn-default.form-contact__btn.form-contact__btn__right(ng-if="mode === 'update'" ng-click="deleteContact(obj)") Удалить

@@ -1,0 +1,32 @@
+.page-app(ng-show="page === 'contacts'")
+	h2.page__title Контакты
+	.row.page-head
+		.col-md-4.col-sm-4.col-xs-4.page-head__col.page-head__col__left
+			button.btn.btn-default.btn-add(ng-click="setPage('create')") Добавить
+		.col-md-4.col-sm-4.col-xs-4.text-center
+			.input-group.page-head__search
+				.input-group-addon.page-head__search-icon
+				input.form-control#search(type="text" placeholder="Поиск" ng-model="search")
+		.col-md-4.col-sm-4.col-xs-4.text-right.page-head__col.page-head__col__right
+			a(href="#" ng-click="tile=true").page__btn.page__btn__tile Плитка
+			a(href="#" ng-click="tile=false").page__btn.page__btn__list Список
+	.page-contact-list.page-main(ng-hide="tile")
+		table.table.table-hover.page-table
+			tr
+				th #
+				th(ng-click="order = 'firstname'") Имя
+				th(ng-click="order = 'secondname'") Фамилия
+				th(ng-click="order = 'phone'") Телефон
+				th(ng-click="order = 'email'") Email
+			tr(ng-repeat="contact in contacts | filter:search | orderBy:order" ng-click="setPage('info', contact)")
+				td {{$index + 1}}
+				td {{contact.firstname}}
+				td {{contact.secondname}}
+				td {{contact.phone}}
+				td {{contact.email}}
+	.page-contact-tile.page-main(ng-show="tile")
+		ul.contact-tile__list
+			li.contact-tile.text-center(ng-repeat="contact in contacts | filter:search | orderBy:order" ng-click="setPage('info', contact)")
+				img.contact-tile__img(src="{{contact.image}}")
+				h3.contact-tile__name {{contact.firstname + ' ' + contact.secondname}}
+				p.contact-tile__number {{contact.phone}}

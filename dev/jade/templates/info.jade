@@ -1,0 +1,36 @@
+.page-app(ng-show="page === 'info'")
+	h2.page__title Контакт
+	.row.page-head.page-head__info
+		button.page-head__btn__back(ng-click="setPage('contacts')")
+	.page-main.contact-form
+		form(name="contactForm")
+			.row
+				.col-md-6.col-sm-6.col-xs-6
+					.contact-form__col.contact-form__col__thumbnail
+						.thumb-container
+							.thumb
+								img#contact-img(src="{{obj.image}}" ng-model="obj.image").contact-form__img
+								.contact-form__img-hover Поменять
+								input#contact-img-input(type="file")
+							.thumb-desc
+								button.btn.btn-default.form-contact__btn.form-contact__btn__left(ng-click="updateContact(obj)" ng-if="changed && contactForm.$valid") Сохранить
+								button.btn.btn-default.form-contact__btn.form-contact__btn__right(ng-if="mode === 'update'" ng-click="deleteContact(obj)") Удалить
+				.col-md-6.col-sm-6.col-xs-6
+					.contact-form__col
+						.form-group.contact-form__group
+							label(for="firstname").contact-form__label Имя
+							input.form-control#firstname(placeholder="Имя контакта" ng-model="obj.firstname" ng-change="changed = true" required)
+							.error(ng-hide="contactForm.$valid") Введите имя
+						.form-group.contact-form__group
+							label(for="secondname").contact-form__label Фамилия
+							input.form-control#secondname(placeholder="Фамилия контакта" ng-model="obj.secondname" ng-change="changed = true")
+						.form-group.contact-form__group
+							label.contact-form__label Контактная информация
+								.input-group.contact-form__input
+									.input-group-addon.contact-form__input-icon.contact-form__input-icon__email
+									input.form-control#email(type="text" placeholder="Email" ng-model="obj.email" ng-change="changed = true")
+							label.contact-form__label
+								.input-group.contact-form__input
+									.input-group-addon.contact-form__input-icon.contact-form__input-icon__phone
+									input.form-control#phone(type="text" placeholder="Телефон" ng-model="obj.phone" ng-change="changed = true")
+

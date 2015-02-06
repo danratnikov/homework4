@@ -1,6 +1,7 @@
-var app = angular.module('app', ['ngRoute', 'firebase', 'blueimp.fileupload']);
+var app = angular.module('app', ['firebase', 'blueimp.fileupload']);
 
 app.controller('ContactController', ['$scope', '$firebase', function($scope, $firebase) {
+	
 	var ref = new Firebase("https://glowing-fire-3534.firebaseio.com/");
 	var sync = $firebase(ref);
 	$scope.contacts = sync.$asArray();
@@ -11,7 +12,6 @@ app.controller('ContactController', ['$scope', '$firebase', function($scope, $fi
 	$scope.save = false;
 	$scope.mode = '';
 	$scope.changed = false;
-
 
 	$scope.setPage = function(p, contact) {
 		if (p === 'create') {
