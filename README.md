@@ -2,7 +2,13 @@
 ===================
 
 
-### Установка
-```npm install
-```bower install
-И запустить веб-сервер в папке ```/app
+## Установка
+<code>npm install</code>
+
+<code>bower install</code>
+
+И запустить веб-сервер в папке <code>/app</code>
+
+## Рзазработка
+
+<code>gulp</code>
