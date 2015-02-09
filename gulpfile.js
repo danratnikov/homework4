@@ -67,14 +67,12 @@ gulp.task('js', function(){
 gulp.task('build', ['jade-page', 'jade-template', 'stylus', 'image' ,'font', 'js'], function(){
 	gulp.src('dev/vendor/bootstrap/dist/css/bootstrap.min.css')
 		.pipe(gulp.dest('app/css/vendor/bootstrap'));
-	gulp.src('dev/vendor/jquery/dist/jquery.min.js')
-		.pipe(gulp.dest('app/js/vendor/jquery'));
-	gulp.src('dev/vendor/angular/angular.min.js+(.*)')
-		.pipe(gulp.dest('app/js/vendor/angular'));
-	gulp.src('dev/vendor/angular-route/angular-route.min.js+(.*)')
-		.pipe(gulp.dest('app/js/vendor/angular'));
-	gulp.src('dev/vendor/jquery-file-upload/js/jquery.fileupload*.js')
-		.pipe(gulp.dest('app/js/vendor/jquery-file-upload'));
+	gulp.src('dev/vendor/**/*')
+		.pipe(gulp.dest('app/js/vendor'));
+	gulp.src('dev/php/**/*')
+		.pipe(gulp.dest('app/php'));
+	gulp.src('dev/favicon.ico')
+		.pipe(gulp.dest('app'));
 });
 
 gulp.task('watch', function(){

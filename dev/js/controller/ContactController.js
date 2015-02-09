@@ -1,10 +1,43 @@
 var app = angular.module('app', ['firebase', 'blueimp.fileupload']);
 
-app.controller('ContactController', ['$scope', '$firebase', function($scope, $firebase) {
-	
+
+app.config(['fileUploadProvider',
+	function(fileUploadProvider) {
+
+		fileUploadProvider.defaults.url = 'php/upload.php';
+		angular.extend(fileUploadProvider.defaults, {
+			disableImageResize: /Android(?!.*Chrome)|Opera/
+				.test(window.navigator.userAgent),
+			maxFileSize: 5000000,
+			acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+		});
+
+	}
+]);
+$
+app.controller('ContactController', ['$scope', '$firebase', '$http', function($scope, $firebase, $http) {
+
 	var ref = new Firebase("https://glowing-fire-3534.firebaseio.com/");
 	var sync = $firebase(ref);
 	$scope.contacts = sync.$asArray();
+
+	$('#contact-img-input').fileupload({
+		url: 'php/upload.php',
+		done: function(e, data) {
+			$scope.obj.image = 'php/files/' + data.files[0].name;
+			$('#contact-img').attr('src', $scope.obj.image).css({'width': '200px', 'height': '200px'});
+
+			$scope.changed = true;
+		}
+	})
+
+
+	$('#contact-img-input').bind('fileuploadadd', function(e, data) {
+
+		var file = data.files[0].name;
+
+		data.submit();
+	});
 
 	$scope.tile = false;
 	$scope.page = 'contacts';
@@ -42,6 +75,8 @@ app.controller('ContactController', ['$scope', '$firebase', function($scope, $fi
 		} else {
 			$scope.contacts.$save($scope.obj);
 		}
+		$scope.changed = false;
+		$scope.setPage('contacts');
 	};
 
 	$scope.deleteContact = function(contact) {
@@ -50,4 +85,3 @@ app.controller('ContactController', ['$scope', '$firebase', function($scope, $fi
 	};
 
 }]);
-
